@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt-get install docker.io -y
+sudo apt-get install docker.io expect -y
 mkdir $HOME/.streamrDocker
 expect <<END
 	set timeout 300
