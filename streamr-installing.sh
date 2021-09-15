@@ -1,22 +1,24 @@
 #!/bin/bash
+mkdir $HOME/.streamrDocker
 sudo apt update
 sudo apt-get install docker.io -y
 sudo apt-get install expect -y
-mkdir $HOME/.streamrDocker
 expect <<END
 	set timeout 300
 	spawn docker run -it -v $(cd ~/.streamrDocker; pwd):/root/.streamr streamr/broker-node:testnet bin/config-wizard
 	expect "Do you want to generate"
 	send -- "\n"
-	expect "Select the plugins"
+	expect "We strongly recommend backing up your private key."
+	send -- "\n"
+	expect "Select the plugins to enable"
 	send -- "a\n"
-	expect "Select a port for the websocket"
+	expect "Provide a port for the websocket Plugin"
 	send -- "\n"
-	expect "Select a port for the mqtt"
+	expect "Provide a port for the mqtt Plugin"
 	send -- "\n"
-	expect "Select a port for the publishHttp"
+	expect "Provide a port for the publishHttp Plugin"
 	send -- "\n"
-	expect "Select a path to store"
+	expect "Select a path to store the generated config"
 	send -- "\n"
 	expect eof
 END
